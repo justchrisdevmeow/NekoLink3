@@ -1,0 +1,41 @@
+name: Build NekoLink3
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller requests psutil keyboard pyautogui pyperclip pygetwindow opencv-python sounddevice soundfile Pillow plyer uptime
+      
+      - name: Build executable
+        run: pyinstaller --onefile --noconsole --name NekoLink3 nekotele.py
+      
+      - name: Prepare release files
+        run: |
+          copy dist\NekoLink3.exe .
+          copy config-template.json config.json
+          echo "# NekoLink3 - Telegram Remote Access Tool" > README.txt
+          echo "1. Edit config.json with your bot token and Telegram user ID" >> README.txt
+          echo "2. Run NekoLink3.exe" >> README.txt
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NekoLink3
+          path: |
+            NekoLink3.exe
+            config.json
+            README.txt
