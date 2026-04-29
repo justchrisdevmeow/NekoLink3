@@ -22,7 +22,7 @@ jobs:
           pip install pyinstaller requests psutil keyboard pyautogui pyperclip pygetwindow opencv-python sounddevice soundfile Pillow plyer uptime
       
       - name: Build executable
-        run: pyinstaller --onefile --noconsole --name NekoLink3 nekotele.py
+        run: pyinstaller --onefile --noconsole --name NekoLink3 main.py
       
       - name: Prepare release files
         run: |
