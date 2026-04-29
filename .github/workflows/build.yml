@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Python
+      - name: Setup Python 3.9
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.9'
       
       - name: Install dependencies
         run: |
@@ -28,9 +28,12 @@ jobs:
         run: |
           copy dist\NekoLink3.exe .
           copy config-template.json config.json
-          echo "# NekoLink3 - Telegram Remote Access Tool" > README.txt
+          echo "NekoLink3 - Telegram Remote Access Tool" > README.txt
+          echo "" >> README.txt
           echo "1. Edit config.json with your bot token and Telegram user ID" >> README.txt
-          echo "2. Run NekoLink3.exe" >> README.txt
+          echo "2. Get bot token from @BotFather on Telegram" >> README.txt
+          echo "3. Get your user ID from @userinfobot on Telegram" >> README.txt
+          echo "4. Run NekoLink3.exe" >> README.txt
       
       - uses: actions/upload-artifact@v4
         with:
