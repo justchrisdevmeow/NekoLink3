@@ -16,10 +16,12 @@ import sounddevice as sd
 import soundfile as sf
 
 # Load config
-config_path = os.path.join(os.path.dirname(__file__), "config.json")
-if not os.path.exists(config_path):
-    print("Error: config.json not found. Rename config-template.json to config.json and edit it.")
-    sys.exit(1)
+if getattr(sys, 'frozen', False):
+    # Running as compiled .exe
+    config_path = os.path.join(os.path.dirname(sys.executable), "config.json")
+else:
+    # Running as script
+    config_path = os.path.join(os.path.dirname(__file__), "config.json")
 
 with open(config_path, "r") as f:
     config = json.load(f)
