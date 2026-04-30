@@ -1,8 +1,7 @@
 import subprocess
-import os
 import platform
 import psutil
-from .utils import show_popup, show_notification
+from src.utils import show_popup, show_notification, execute_command
 
 def execute_command(cmd):
     try:
