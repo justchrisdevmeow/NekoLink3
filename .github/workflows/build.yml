@@ -12,33 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Python 3.9
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
       
       - name: Install dependencies
-        run: |
-          pip install pyinstaller requests psutil keyboard pyautogui pyperclip pygetwindow opencv-python sounddevice soundfile Pillow plyer uptime
+        run: pip install requests psutil win10toast pyinstaller
       
       - name: Build executable
-        run: pyinstaller --onefile --name NekoLink3 main.py
+        run: pyinstaller --onedir --noconsole --name NekoLink3 --hidden-import win10toast src/main.py
       
-      - name: Prepare release files
-        run: |
-          copy dist\NekoLink3.exe .
-          copy config-template.json config.json
-          echo "NekoLink3 - Telegram Remote Access Tool" > README.txt
-          echo "" >> README.txt
-          echo "1. Edit config.json with your bot token and Telegram user ID" >> README.txt
-          echo "2. Get bot token from @BotFather on Telegram" >> README.txt
-          echo "3. Get your user ID from @userinfobot on Telegram" >> README.txt
-          echo "4. Run NekoLink3.exe" >> README.txt
+      - name: Copy config template
+        run: copy config-template.json dist\NekoLink3\config.json
       
       - uses: actions/upload-artifact@v4
         with:
           name: NekoLink3
-          path: |
-            NekoLink3.exe
-            config.json
-            README.txt
+          path: dist\NekoLink3\
