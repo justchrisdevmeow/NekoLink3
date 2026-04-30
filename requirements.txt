@@ -1,4 +1,13 @@
 requests
 psutil
-win10toast
 pyinstaller
+win10toast
+pyperclip
+keyboard
+pyautogui
+pygetwindow
+opencv-python
+sounddevice
+soundfile
+Pillow
+uptime
