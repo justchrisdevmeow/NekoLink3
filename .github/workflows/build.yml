@@ -18,10 +18,12 @@ jobs:
           python-version: '3.9'
       
       - name: Install dependencies
-        run: pip install requests psutil win10toast pyinstaller
+        run: |
+          pip install requests psutil win10toast pyinstaller
       
       - name: Build executable
-        run: pyinstaller --onedir --noconsole --name NekoLink3 --hidden-import win10toast src/main.py
+        run: |
+          pyinstaller --onedir --noconsole --name NekoLink3 --hidden-import win10toast run.py
       
       - name: Copy config template
         run: copy config-template.json dist\NekoLink3\config.json
