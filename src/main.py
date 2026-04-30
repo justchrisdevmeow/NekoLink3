@@ -1,9 +1,9 @@
 import time
-from .bot import get_updates, send_message, BOT_TOKEN, ALLOWED_IDS
-from .commands import handle_exec, handle_info, handle_ps, handle_notify, handle_popup
+from src.bot import get_updates, send_message, BOT_TOKEN, ALLOWED_IDS
+from src.commands import handle_exec, handle_info, handle_ps, handle_notify, handle_popup
 
 def main():
-    print("NekoLink-3 Running...")
+    print("NekoLink-3 Running...(actually)")
     last_update_id = 0
     
     while True:
