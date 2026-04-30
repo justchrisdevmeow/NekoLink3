@@ -1,8 +1,16 @@
 import requests
 import sys
-import json
 import os
-from src.utils import load_config
+import json
+
+def load_config():
+    if getattr(sys, 'frozen', False):
+        config_path = os.path.join(os.path.dirname(sys.executable), "config.json")
+    else:
+        config_path = os.path.join(os.path.dirname(__file__), "..", "config.json")
+    
+    with open(config_path, 'r') as f:
+        return json.load(f)
 
 config = load_config()
 BOT_TOKEN = config["bot_token"]
@@ -23,3 +31,11 @@ def send_message(chat_id, text):
         requests.post(url, data={"chat_id": chat_id, "text": text[:4096]}, timeout=10)
     except:
         pass
+
+def send_file(chat_id, file_path):
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
+    try:
+        with open(file_path, 'rb') as f:
+            requests.post(url, files={'document': f}, data={'chat_id': chat_id}, timeout=30)
+    except Exception as e:
+        send_message(chat_id, f"File send failed: {str(e)}")
