@@ -1,6 +1,8 @@
 import requests
-import time
-from .utils import load_config
+import sys
+import json
+import os
+from src.utils import load_config
 
 config = load_config()
 BOT_TOKEN = config["bot_token"]
