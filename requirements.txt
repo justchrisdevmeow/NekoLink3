@@ -1,0 +1,4 @@
+requests
+psutil
+win10toast
+pyinstaller
